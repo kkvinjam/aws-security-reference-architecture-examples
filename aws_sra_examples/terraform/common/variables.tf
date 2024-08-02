@@ -40,3 +40,9 @@ variable "solution_name" {
   description = "Name of the SRA solution"
   type        = string
 }
+
+variable "path_of_root" {
+  default     = null
+  description = "Absolute path to the root"
+  type        = string
+}

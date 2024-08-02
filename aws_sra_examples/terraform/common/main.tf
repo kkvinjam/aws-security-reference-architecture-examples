@@ -15,6 +15,7 @@ module "mangement_account_parameters" {
   governed_regions       = var.governed_regions
   security_account_id    = var.security_account_id
   log_archive_account_id = var.log_archive_account_id
+  path_of_root = local.path_of_root_value
 }
 
 module "sra_execution_role" {
@@ -36,7 +37,7 @@ module "sra_secrets_kms" {
 resource "aws_cloudformation_stack_set" "sra_execution_role_stackset" {
   name          = "sra-stackset-execution-role"
   description   = "SRA execution role stackset"
-  template_body = file("${path.root}/sra_execution_role/execution-role.yaml")
+  template_body = file("${local.path_of_root_value}/sra_execution_role/execution-role.yaml")
   parameters = {
     pSRAExecutionRoleName = var.execution_role_name,
     pSRASolutionName      = var.solution_name,
@@ -93,7 +94,7 @@ resource "local_file" "backend_file_creation" {
     encrypt        = true
     dynamodb_table = "${module.dynamo_tf_lock.dynamo_db_table_name}"
     EOT
-  filename   = "${path.root}/../solutions/backend.tfvars"
+  filename   = "${local.path_of_root_value}/../solutions/backend.tfvars"
 }
 
 resource "local_file" "config_file_creation" {
@@ -190,5 +191,5 @@ resource "local_file" "config_file_creation" {
     enable_s3_data_events     = true
     disable_cloudtrail        = false
     EOT
-  filename   = "${path.root}/../solutions/config.tfvars"
+  filename   = "${local.path_of_root_value}/../solutions/config.tfvars"
 }

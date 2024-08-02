@@ -76,3 +76,9 @@ variable "sra_staging_s3_bucket_name" {
   type        = string
   default     = ""
 }
+
+variable "path_of_root" {
+  default     = null
+  description = "Absolute path to the root"
+  type        = string
+}

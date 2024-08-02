@@ -19,7 +19,7 @@ locals {
   ]
   account_id = data.aws_caller_identity.current.account_id
   region     = data.aws_region.current.name
-  src_path   = "${path.root}/../../solutions/common/common_prerequisites/lambda/src/"
+  src_path   = "${local.path_of_root_value}/../../solutions/common/common_prerequisites/lambda/src/"
 }
 
 
